@@ -1,0 +1,11 @@
+C:\Users\root\Source\Repos\Volo-Task\Books\BookStoreEntity\bin\Debug\Database1.mdf
+C:\Users\root\Source\Repos\Volo-Task\Books\BookStoreEntity\bin\Debug\Database1_log.ldf
+C:\Users\root\Source\Repos\Volo-Task\Books\BookStoreEntity\bin\Debug\EntityFramework.dll
+C:\Users\root\Source\Repos\Volo-Task\Books\BookStoreEntity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\root\Source\Repos\Volo-Task\Books\BookStoreEntity\bin\Debug\EntityFramework.xml
+C:\Users\root\Source\Repos\Volo-Task\Books\BookStoreEntity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\root\Source\Repos\Volo-Task\Books\BookStoreEntity\obj\Debug\BookStoreEntity.csprojResolveAssemblyReference.cache
+C:\Users\root\Source\Repos\Volo-Task\Books\BookStoreEntity\obj\Debug\BookStoreEntity.dll
+C:\Users\root\Source\Repos\Volo-Task\Books\BookStoreEntity\obj\Debug\BookStoreEntity.pdb
+C:\Users\root\Source\Repos\Volo-Task\Books\BookStoreEntity\bin\Debug\BookStoreEntity.dll
+C:\Users\root\Source\Repos\Volo-Task\Books\BookStoreEntity\bin\Debug\BookStoreEntity.pdb

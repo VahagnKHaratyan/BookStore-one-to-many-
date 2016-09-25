@@ -1,0 +1,148 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#custom-search-input {
+    width: 300px;
+        margin:0;
+       
+        padding: 0;
+        display: inline-block;
+        float: right;
+        margin-top: 30px;
+    }
+ 
+    #custom-search-input .search-query {
+        padding-right: 3px;
+        padding-right: 4px \9;
+        padding-left: 3px;
+        padding-left: 4px \9;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+ 
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+ 
+    #custom-search-input button {
+        border: 0;
+        background: none;
+        /** belows styles are working good */
+        padding: 2px 5px;
+        margin-top: 2px;
+        position: relative;
+        left: -28px;
+        /* IE7-8 doesn't have border-radius, so don't indent the padding */
+        margin-bottom: 0;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        color:#D9230F;
+    }
+ 
+    .search-query:focus + button {
+        z-index: 3;   
+    }
+
+
+
+ .list_item {
+    width: 181px;
+    border: 1px solid #ccc;
+    float: left;
+    margin: 5px;
+    display:inline-block;
+    }
+    .list_item a {
+    text-decoration:none;
+    }
+    a img {
+    border: none;
+    text-align: center;
+    width: 178px;
+    }
+    .list_item span.list_item_info {
+    display: block;
+    margin: 0 5px;
+    }
+    .list_item_image {
+    display: block;
+    width: 171px;
+    margin: 5px;
+    overflow: hidden;
+    text-align: center;
+    height: auto !important;
+    min-height: 183px;
+}
+.center {
+    text-align: center;
+}
+.diplay-block {
+    display:block;
+}
+.book-price{
+    color: #F44336;
+}
+.book-author{
+    color: #a90f04;
+}
+.text_common {
+    font-family: Arial;
+    font-style: normal;
+    font-size: 12px;
+
+}
+
+.book-title{
+    white-space: nowrap;
+    width: 65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    color: #5caf53;
+    position: relative;
+    left: 17%;
+}
+
+.clear {
+    clear:both;
+}
+.small-img {
+    width:50px;
+}
+
+.hidden {
+display:none;
+}
+.sort_up_arrow {
+    margin-right: -8px;
+    color: #cccccc;
+}
+.sort_down_arrow {
+
+    color: #cccccc;
+}

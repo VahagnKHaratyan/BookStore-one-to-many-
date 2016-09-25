@@ -1,0 +1,160 @@
+﻿@model BookStoreEntity.Books
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Books</h4>
+    <hr />
+    <div class="list_item">
+        <a href="#">
+            <span class="list_item_image"><img alt="" src="~/Upload/@Model.Picture"></span>
+            <span class="list_item_info">
+
+                <span class="text_common container">
+
+                    <span class="book-price">@Html.DisplayFor(model => model.Price) €</span>
+                </span>
+            </span>
+        </a>
+    </div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PageCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PageCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BookDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookDescription)
+        </dd>
+
+    
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Authors.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Authors.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Countries.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Countries.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Geners.Gener)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Geners.Gener)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@*<div>
+    <h4>@Html.DisplayFor(model => model.title)</h4>
+    <hr />
+    <div class="list_item">
+        <a href="/product/show/9990">
+            <span class="list_item_image"><img alt="" src="~/Upload/@Model.picture"></span>
+            <span class="list_item_info">
+
+                <span class="text_common container">
+
+                    <span class="book-price">@Html.DisplayFor(model => model.price) €</span>
+                </span>
+            </span>
+        </a>
+    </div>
+    <div style="display:inline-block;">
+        <dl class="dl-horizontal">
+            <dt>
+
+            </dt>
+
+            <dd>
+
+            </dd>
+
+
+
+            <dt>
+                Pages
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.page_count)
+            </dd>
+
+            <dt>
+                Description
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.book_description)
+            </dd>
+
+
+
+        </dl>
+    </div>
+
+    <div class="clear">
+        <div class="container">
+            <h2>Authors</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Birth Date</th>
+                        <th>Countrie</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var autor in Model.Authors)
+                    {
+                        <tr>
+                            <td>@autor.first_name</td>
+                            <td>@autor.last_name</td>
+                            <td>@autor.birth_date</td>
+                            <td>@autor.Countries.name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div>*@

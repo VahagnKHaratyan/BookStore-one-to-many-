@@ -1,0 +1,37 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model PagedList.IPagedList<BookStoreEntity.Books>
+
+<div id="list">
+
+    @foreach (var item in Model)
+    {
+
+
+        <div class="list_item">
+            <a href="~/Books/Details/@item.ID">
+                <span class="list_item_image"><img alt="" src="~/Upload/@item.Picture"></span>
+                <span class="list_item_info">
+
+                    <span class="text_common container center">
+                        <span class="center book-title" data-toggle="tooltip" title="@item.Title">@item.Title</span>
+                        <span class="center diplay-block">@item.Authors.FirstName @item.Authors.LastName</span>
+                        <span class="center diplay-block book-price">@Html.DisplayFor(modelItem => item.Price) </span>
+                    </span>
+                </span>
+            </a>
+        </div>
+    }
+    <div class="clear">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { searchString = Request.QueryString["searchString"],  pageType = "image", page }))
+    </div>
+    </div>
+
+
+
+
+
+
+
+

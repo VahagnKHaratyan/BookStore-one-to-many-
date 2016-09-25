@@ -1,0 +1,93 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model PagedList.IPagedList<BookStoreEntity.Books>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<div id="ProductList">
+<table class="table table-striped tablesorter">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => Model[0].Picture)
+        </th>
+        <th>   
+            @Html.DisplayNameFor(model => Model[0].Title)
+            <i class="fa fa-sort-asc sort_up_arrow " aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model[0].Price)
+            <i class="fa fa-sort-asc sort_up_arrow" aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model[0].PageCount)
+            <i class="fa fa-sort-asc sort_up_arrow" aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => Model[0].Authors.FirstName)
+            <i class="fa fa-sort-asc sort_up_arrow" aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model[0].Authors.LastName)
+            <i class="fa fa-sort-asc sort_up_arrow" aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model[0].Countries.Name)
+            <i class="fa fa-sort-asc sort_up_arrow" aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => Model[0].Geners.Gener)
+             <i class="fa fa-sort-asc sort_up_arrow" aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
+        </th>
+      
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img alt="" src="~/Upload/@item.Picture" class="small-img">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PageCount)
+            </td>            
+            <td>
+                @Html.DisplayFor(modelItem => item.Authors.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Authors.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Countries.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Geners.Gener)
+            </td>
+           
+            <td>
+               
+                 
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) 
+               
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span>|</span>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                    <span>|</span>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { onclick = "return confirm('Are you sure?');" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+   
+    <div class="clear">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new {searchString = Request.QueryString["searchString"], sortOption = Request.QueryString["sortOption"], pageType = "table", page }))
+    </div>
+</div>
