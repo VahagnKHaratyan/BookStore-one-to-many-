@@ -9,18 +9,19 @@
 <div>
     <h4>Books</h4>
     <hr />
-    <div class="list_item">
+    <div class="list_item detail-position">
         <a href="#">
             <span class="list_item_image"><img alt="" src="~/Upload/@Model.Picture"></span>
             <span class="list_item_info">
 
                 <span class="text_common container">
 
-                    <span class="book-price">@Html.DisplayFor(model => model.Price) €</span>
+                    <span class="book-price">@Html.DisplayFor(model => model.Price)</span>
                 </span>
             </span>
         </a>
     </div>
+    <div class="detail-view detail-position">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Title)
@@ -29,7 +30,30 @@
         <dd>
             @Html.DisplayFor(model => model.Title)
         </dd>
+    <dt>
+            @Html.DisplayNameFor(model => model.Authors.FirstName)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Authors.FirstName)
+        </dd>
+
+       
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Geners.Gener)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Geners.Gener)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Countries.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Countries.Name)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.PageCount)
         </dt>
@@ -42,42 +66,18 @@
             @Html.DisplayNameFor(model => model.BookDescription)
         </dt>
 
+
         <dd>
             @Html.DisplayFor(model => model.BookDescription)
         </dd>
 
-    
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Authors.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Authors.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Countries.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Countries.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Geners.Gener)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Geners.Gener)
-        </dd>
-
     </dl>
+        </div>
 </div>
-<p>
+<div>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</div>
 @*<div>
     <h4>@Html.DisplayFor(model => model.title)</h4>
     <hr />

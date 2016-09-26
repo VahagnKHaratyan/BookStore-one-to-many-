@@ -146,3 +146,13 @@ display:none;
 
     color: #cccccc;
 }
+.link-another-controller{
+    font-size: 19px;
+    margin-top: 6px;
+}
+.detail-position{
+    display:inline-block;
+}
+.detail-view {
+    height: 284px;
+}

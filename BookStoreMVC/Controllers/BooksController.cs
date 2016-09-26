@@ -18,7 +18,7 @@ namespace BookStoreMVC.Controllers
         private Database1Entities db = new Database1Entities();
 
         // GET: Books
-        public async Task<ActionResult> Index(string searchString, string sortOption, int page = 1, string pageType = "image")
+        public async Task<ActionResult> Index(string searchString, string sortOption, int page = 1, string pageType = "table")
         {
             
             var books = db.Books.Include(b => b.Authors).Include(b => b.Countries).Include(b => b.Geners);
@@ -234,29 +234,12 @@ namespace BookStoreMVC.Controllers
         [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Books books = await db.Books.FindAsync(id);
-            if (books == null)
-            {
-                return HttpNotFound();
-            }
-            return View(books);
-        }
-
-        // POST: Books/Delete/5
-        [Authorize]
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
             Books books = await db.Books.FindAsync(id);
             db.Books.Remove(books);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
 
         protected override void Dispose(bool disposing)
         {

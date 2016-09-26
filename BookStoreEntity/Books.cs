@@ -22,7 +22,7 @@ namespace BookStoreEntity
        
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Price is required")]      
-        [RegularExpression(@"^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$", ErrorMessage = "enter decimal value of format $9.99")]
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "enter decimal value of format $9.99")]
 
         public decimal Price { get; set; }
         public Nullable<int> PageCount { get; set; }

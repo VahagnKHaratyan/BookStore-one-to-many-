@@ -2,7 +2,8 @@
 @using PagedList.Mvc;
 
 @model PagedList.IPagedList<BookStoreEntity.Books>
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+
 <div id="ProductList">
 <table class="table table-striped tablesorter">
     <tr>
@@ -80,6 +81,7 @@
                     @Html.ActionLink("Edit", "Edit", new { id = item.ID })
                     <span>|</span>
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { onclick = "return confirm('Are you sure?');" })
+                   
                 }
             </td>
         </tr>
