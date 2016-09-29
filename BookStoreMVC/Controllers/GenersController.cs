@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BookStoreEntity;
+using PagedList;
 
 namespace BookStoreMVC.Controllers
 {
@@ -17,9 +18,13 @@ namespace BookStoreMVC.Controllers
         private Database1Entities db = new Database1Entities();
 
         // GET: Geners
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int page = 1)
         {
-            return View(await db.Geners.ToListAsync());
+            int pageSize = 5;
+            var gener = db.Geners.OrderBy(p => p.ID);
+            return Request.IsAjaxRequest()
+              ? (ActionResult)PartialView("Index", gener.ToPagedList(page, pageSize))
+              : View(gener.ToPagedList(page, pageSize));
         }
 
         // GET: Geners/Details/5

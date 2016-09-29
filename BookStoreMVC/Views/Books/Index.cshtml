@@ -5,13 +5,18 @@
 @{
     ViewBag.Title = "Books";
 }
+<div class="hasdda">
 <div id="mainContent" data-pageType='@ViewBag.pageType'>
+    @if (User.Identity.IsAuthenticated)
+    {
+
     <div class="link-another-controller">
         <span>@Html.ActionLink("Authors", "Index", "Authors")</span> /
         <span>@Html.ActionLink("Countries", "Index", "Countries")</span> /
         <span>@Html.ActionLink("Geners", "Index", "Authors")</span>
 
     </div>
+    }
     <div class="container">
         <div class="row">
 
@@ -45,6 +50,7 @@
 
     </div>
 </div>
+    </div>
 @section scripts
 {
     <script type="text/javascript">

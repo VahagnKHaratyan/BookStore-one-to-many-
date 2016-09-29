@@ -31,11 +31,12 @@
             @Html.DisplayFor(model => model.Title)
         </dd>
     <dt>
-            @Html.DisplayNameFor(model => model.Authors.FirstName)
+        Name
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Authors.FirstName)
+            @Html.DisplayFor(model => model.Authors.FirstName)-
+            @Html.DisplayFor(model => model.Authors.LastName)
         </dd>
 
        
@@ -48,14 +49,14 @@
             @Html.DisplayFor(model => model.Geners.Gener)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Countries.Name)
+            Countrie
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Countries.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.PageCount)
+            Page
         </dt>
 
         <dd>
@@ -63,7 +64,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BookDescription)
+            Description
         </dt>
 
 

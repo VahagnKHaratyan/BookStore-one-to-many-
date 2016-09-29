@@ -19,19 +19,16 @@
             <i class="fa fa-sort-asc sort_up_arrow" aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
         </th>
         <th>
-            @Html.DisplayNameFor(model => Model[0].PageCount)
+            Page
             <i class="fa fa-sort-asc sort_up_arrow" aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
         </th>        
         <th>
-            @Html.DisplayNameFor(model => Model[0].Authors.FirstName)
+            Name
             <i class="fa fa-sort-asc sort_up_arrow" aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
         </th>
+        
         <th>
-            @Html.DisplayNameFor(model => Model[0].Authors.LastName)
-            <i class="fa fa-sort-asc sort_up_arrow" aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => Model[0].Countries.Name)
+            Countrie
             <i class="fa fa-sort-asc sort_up_arrow" aria-hidden="true"></i><i class="fa fa-sort-desc sort_down_arrow" aria-hidden="true"></i>
         </th>
         <th>
@@ -46,7 +43,9 @@
     {
         <tr>
             <td>
+                  <a href="~/Books/Details/@item.ID">
                 <img alt="" src="~/Upload/@item.Picture" class="small-img">
+                      </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -58,11 +57,10 @@
                 @Html.DisplayFor(modelItem => item.PageCount)
             </td>            
             <td>
-                @Html.DisplayFor(modelItem => item.Authors.FirstName)
-            </td>
-            <td>
+                @Html.DisplayFor(modelItem => item.Authors.FirstName) -
                 @Html.DisplayFor(modelItem => item.Authors.LastName)
             </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Countries.Name)
             </td>

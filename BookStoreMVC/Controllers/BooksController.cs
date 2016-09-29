@@ -206,7 +206,7 @@ namespace BookStoreMVC.Controllers
 
                     }
 
-                    string filename = Guid.NewGuid().ToString() + Path.GetExtension(upload.FileName);
+                    string filename = Guid.NewGuid().ToString() + "_" + Path.GetExtension(upload.FileName);
                     string path = Path.Combine(Server.MapPath("~/Upload"), filename);//("~/App_Data/Images"), filename);
                     upload.SaveAs(path);
                     string oldFilePath = Path.Combine(Server.MapPath("~/Upload"), books.Picture);

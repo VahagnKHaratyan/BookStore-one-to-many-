@@ -1,10 +1,12 @@
-﻿@model IEnumerable<BookStoreEntity.Geners>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<BookStoreEntity.Geners>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Geners</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,7 +14,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Gener)
+            @Html.DisplayNameFor(model => Model[0].Gener)
         </th>
         <th></th>
     </tr>
@@ -31,3 +33,4 @@
 }
 
 </table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
