@@ -78,17 +78,22 @@ textarea {
  .list_item {
     width: 181px;
     border: 1px solid #ccc;
-    float: left;
+    /*float: left;*/
     margin: 5px;
     display:inline-block;
     }
+  #bookList .list_item a img:hover{
+      width:177px;
+      
+    
+  }
     .list_item a {
     text-decoration:none;
     }
     a img {
     border: none;
     text-align: center;
-    width: 178px;
+    width: 171px;
     }
     .list_item span.list_item_info {
     display: block;

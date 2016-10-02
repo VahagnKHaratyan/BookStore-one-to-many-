@@ -81,7 +81,7 @@ namespace BookStoreMVC.Controllers
 
             if (pageType == "table")
             {
-                pageSize = 8;
+                pageSize = 5;
                 ViewBag.pageType = "table";
             }
             else
