@@ -1,14 +1,17 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color:#525050;
+ /* background-image:url("images/book.png");
+   background-size:cover;*/
+    
+       //  background-color: #3e3737;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-       background-color: #b3abab;
+    //  background-color: whitesmoke;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 

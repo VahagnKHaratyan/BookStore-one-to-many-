@@ -25,7 +25,7 @@ namespace BookStoreMVC.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
 
-                books = db.Books.Where(p => p.Title.ToLower().Contains(searchString));
+                books = db.Books.Where(p => p.Title.ToLower().Contains(searchString) || (p.Authors.FirstName.ToLower() + " " + p.Authors.LastName.ToLower()).Contains(searchString));
             }
             switch (sortOption)
             {
@@ -78,6 +78,7 @@ namespace BookStoreMVC.Controllers
 
             }
             int pageSize;
+
             if (pageType == "table")
             {
                 pageSize = 8;
@@ -89,7 +90,10 @@ namespace BookStoreMVC.Controllers
                 ViewBag.pageType = "image";
             }
 
-
+          if(page > books.Count()/ pageSize +1)
+            {
+                page = 1;
+            }
 
             return Request.IsAjaxRequest()
                 ? pageType == "image" ? (ActionResult)PartialView("_ImageList", books.ToPagedList(page, pageSize)) : (ActionResult)PartialView("_BookList", books.ToPagedList(page, pageSize))
@@ -194,32 +198,32 @@ namespace BookStoreMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (upload != null)
-                {
-                    var supportedTypes = new[] { "jpg", "jpeg", "png" };
-                    var fileExt = System.IO.Path.GetExtension(upload.FileName).Substring(1);
+                 if (upload != null)
+                 {
+                     var supportedTypes = new[] { "jpg", "jpeg", "png" };
+                     var fileExt = System.IO.Path.GetExtension(upload.FileName).Substring(1);
 
-                    if (!supportedTypes.Contains(fileExt))
-                    {
-                        return RedirectToAction("Index");
-                        // ModelState.AddModelError("photo", "Invalid type. Only the following types (jpg, jpeg, png) are supported.");
+                     if (!supportedTypes.Contains(fileExt))
+                     {
+                         return RedirectToAction("Index");
+                         // ModelState.AddModelError("photo", "Invalid type. Only the following types (jpg, jpeg, png) are supported.");
 
-                    }
+                     }
 
-                    string filename = Guid.NewGuid().ToString() + "_" + Path.GetExtension(upload.FileName);
-                    string path = Path.Combine(Server.MapPath("~/Upload"), filename);//("~/App_Data/Images"), filename);
-                    upload.SaveAs(path);
-                    string oldFilePath = Path.Combine(Server.MapPath("~/Upload"), books.Picture);
+                     string filename = Guid.NewGuid().ToString() + "_" + Path.GetExtension(upload.FileName);
+                     string path = Path.Combine(Server.MapPath("~/Upload"), filename);//("~/App_Data/Images"), filename);
+                     upload.SaveAs(path);
+                     string oldFilePath = Path.Combine(Server.MapPath("~/Upload"), books.Picture);
 
-                    if (System.IO.File.Exists(oldFilePath) && books.Picture != "defoult.png")
-                    {
+                     if (System.IO.File.Exists(oldFilePath) && books.Picture != "defoult.png")
+                     {
 
-                        System.IO.File.Delete(oldFilePath);
-                    }
-                    books.Picture = filename;
+                         System.IO.File.Delete(oldFilePath);
+                     }
+                     books.Picture = filename;
 
-                }
-               
+                 }
+                 
                 db.Entry(books).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

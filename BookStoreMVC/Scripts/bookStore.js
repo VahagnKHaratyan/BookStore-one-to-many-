@@ -5,8 +5,16 @@ function search() {
         
         url: "/Books/Index?searchString=" + $('#SearchString').val() + "&pageType=" + pageType,
         success: function (result) {
-            ChangeUrl("index", "/Books/Index?searchString=" + $('#SearchString').val());
-            $('#bookList').html(result);
+      
+            ChangeUrl("index", "/Books/Index?searchString=" + $('#SearchString').val().trim());
+        
+            if ($(result).find("table tr:nth-child(2)").children().length == 0) {
+               
+                $('#bookList').html(result + '<div style="color:red;font-size:18pt; text-align:center;;">There is no resualt</div>');
+               ;
+            } else {
+                $('#bookList').html(result);
+            }
         }
     });
 }
