@@ -35,5 +35,6 @@ namespace BookStoreEntity
         public virtual Authors Authors { get; set; }
         public virtual Countries Countries { get; set; }
         public virtual Geners Geners { get; set; }
+       
     }
 }

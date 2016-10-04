@@ -119,7 +119,7 @@ namespace BookStoreMVC.Controllers
         // GET: Books/Create
         public ActionResult Create()
         {
-            ViewBag.AuthorId = new SelectList(db.Authors, "ID", "FirstName");
+            ViewBag.AuthorId = new SelectList(db.Authors, "ID", "FullName");
             ViewBag.CountryId = new SelectList(db.Countries, "ID", "Name");
             ViewBag.GenerId = new SelectList(db.Geners, "ID", "Gener");
             return View();
@@ -182,7 +182,7 @@ namespace BookStoreMVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AuthorId = new SelectList(db.Authors, "ID", "FirstName", books.AuthorId);
+            ViewBag.AuthorId = new SelectList(db.Authors, "ID", "FullName", books.AuthorId);
             ViewBag.CountryId = new SelectList(db.Countries, "ID", "Name", books.CountryId);
             ViewBag.GenerId = new SelectList(db.Geners, "ID", "Gener", books.GenerId);
             return View(books);

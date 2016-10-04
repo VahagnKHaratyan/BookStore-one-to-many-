@@ -82,8 +82,11 @@ textarea {
     margin: 5px;
     display:inline-block;
     }
+  .list_item:hover{
+        border: 1px solid #428bca;
+  }
   #bookList .list_item a img:hover{
-      width:177px;
+      width:172px;
       
     
   }
@@ -101,7 +104,7 @@ textarea {
     }
     .list_item_image {
     display: block;
-    width: 171px;
+    width: 169px;
     margin: 5px;
     overflow: hidden;
     text-align: center;
@@ -162,7 +165,15 @@ display:none;
 }
 .detail-position{
     display:inline-block;
+
 }
 .detail-view {
     height: 284px;
+    width: 81%;
+}
+#catalog-home {
+    margin-top:6px;
+}
+#catalog-home img {
+    width:60px;
 }

@@ -4,6 +4,8 @@
 @model PagedList.IPagedList<BookStoreEntity.Books>
 
 <div id="list">
+    @*@Html.ActionLink("sdfs", "Index", "Books", new { pageType = "table" }, new { @style = "background-image:url('~/Content/images/home.png')", @class = "navbar-brand" })*@
+
 
     @foreach (var item in Model)
     {

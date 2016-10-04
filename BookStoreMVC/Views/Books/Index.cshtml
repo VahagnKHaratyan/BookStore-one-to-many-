@@ -5,6 +5,10 @@
 @{
     ViewBag.Title = "Books";
 }
+<div id="catalog-home">
+<a href="~/Books/Index?pageType=table"><img  src="~/Content/images/home.jpg" /></a>
+<a href="~/Books/Index?pageType=image"><img src="~/Content/images/catalog.png" /></a>
+</div>
 <div class="hasdda">
 <div id="mainContent" data-pageType='@ViewBag.pageType'>
     @if (User.Identity.IsAuthenticated)
@@ -38,12 +42,14 @@
     <div id="bookList">
         @if (@ViewBag.pageType == "image")
         {
-            // @Html.Partial("_BookList", Model);
+            // @Html.Partial("_BookList", Model);         
+
             @Html.Partial("_ImageList", Model);
 
         }
         else
         {
+
             @Html.Partial("_BookList", Model);
 
         }
