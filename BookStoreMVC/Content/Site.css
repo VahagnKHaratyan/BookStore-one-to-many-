@@ -53,6 +53,7 @@ textarea {
         border-radius: 3px;
     }
  
+
     #custom-search-input button {
         border: 0;
         background: none;
@@ -82,14 +83,15 @@ textarea {
     margin: 5px;
     display:inline-block;
     }
-  .list_item:hover{
-        border: 1px solid #428bca;
+  .list_item:hover ,table .small-img:hover{
+        /*border: 1px solid #428bca;*/
+         box-shadow: 2px 2px 6px #428bca;
   }
-  #bookList .list_item a img:hover{
+  /*#bookList .list_item a img:hover{
       width:172px;
       
     
-  }
+  }*/
     .list_item a {
     text-decoration:none;
     }
