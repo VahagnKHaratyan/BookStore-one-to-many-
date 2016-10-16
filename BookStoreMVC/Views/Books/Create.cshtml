@@ -78,8 +78,7 @@
                multiple = "multiple" })
                 @*@Html.ValidationMessageFor(model => model.Attribute_Book, "", new { @class = "text-danger" })*@
 
-                @Html.TextBoxFor(x => x.BookAttributes, new { @class = "form-control", id = "attDate", placeholder = "Published Date", style = "display:none;margin-top:10px;border-radius:2px;", Name = "date" })
-                @Html.TextBoxFor(x => x.BookAttributes, new { @class = "form-control", id = "attText", placeholder = "Copies", style = "display:none;margin-top:10px;border-radius:2px;", Name = "attText" })
+              
             </div>
         </div>
 
@@ -99,21 +98,8 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script>
 
-        $(function () {
-            $('#attributes').change(function () {
-                var value = $(this).val();
-                if (value == '1') {
-                    $('#attText').show();
-                } else {
-                    $('#attText').hide();
-                }
-                if (value == '2') {
-                    $('#attDate').show();
-                } else {
-                    $('#attDate').hide();
-                }
-            });
-        });
+      
+     
         //$(".AttrList select option").click(function () {
         //    $.ajax({
 
