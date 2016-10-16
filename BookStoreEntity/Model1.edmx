@@ -5,6 +5,83 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Attributes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AttrType" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttributeValues">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AttrValue" Type="varchar" MaxLength="1000" />
+          <Property Name="AttrId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Authors">
           <Key>
             <PropertyRef Name="ID" />
@@ -14,6 +91,15 @@
           <Property Name="LastName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="BirthDate" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="BookAttributes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookId" Type="int" Nullable="false" />
+          <Property Name="AttrId" Type="int" Nullable="false" />
+          <Property Name="AttrValue" Type="varchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
         <EntityType Name="Books">
           <Key>
             <PropertyRef Name="ID" />
@@ -21,12 +107,11 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="PageCount" Type="int" />
-          <Property Name="BookDescription" Type="text" />
+          <Property Name="PageCount" Type="int" Nullable="false" />
+          <Property Name="BookDescription" Type="text" Nullable="false" />
           <Property Name="Picture" Type="varchar" MaxLength="255" />
           <Property Name="CountryId" Type="int" Nullable="false" />
           <Property Name="AuthorId" Type="int" Nullable="false" />
-          <Property Name="GenerId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -36,14 +121,43 @@
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CountryCode" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Geners">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Gener" Type="varchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <Association Name="FK__Books__AuthorId__2B3F6F97">
+        <Association Name="FK__Attribute__AttrI__29221CFB">
+          <End Role="Attributes" Type="Self.Attributes" Multiplicity="1" />
+          <End Role="AttributeValues" Type="Self.AttributeValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attributes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeValues">
+              <PropertyRef Name="AttrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BookAttri__AttrI__151B244E">
+          <End Role="Attributes" Type="Self.Attributes" Multiplicity="1" />
+          <End Role="BookAttributes" Type="Self.BookAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attributes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookAttributes">
+              <PropertyRef Name="AttrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BookAttri__BookI__160F4887">
+          <End Role="Books" Type="Self.Books" Multiplicity="1" />
+          <End Role="BookAttributes" Type="Self.BookAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookAttributes">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books__AuthorId__17036CC0">
           <End Role="Authors" Type="Self.Authors" Multiplicity="1" />
           <End Role="Books" Type="Self.Books" Multiplicity="*" />
           <ReferentialConstraint>
@@ -55,7 +169,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Books__CountryId__2A4B4B5E">
+        <Association Name="FK__Books__CountryId__17F790F9">
           <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
           <End Role="Books" Type="Self.Books" Multiplicity="*" />
           <ReferentialConstraint>
@@ -67,34 +181,110 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Books__GenerId__2C3393D0">
-          <End Role="Geners" Type="Self.Geners" Multiplicity="1" />
-          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Geners">
-              <PropertyRef Name="ID" />
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Books">
-              <PropertyRef Name="GenerId" />
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attributes" EntityType="Self.Attributes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AttributeValues" EntityType="Self.AttributeValues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookAttributes" EntityType="Self.BookAttributes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Geners" EntityType="Self.Geners" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Books__AuthorId__2B3F6F97" Association="Self.FK__Books__AuthorId__2B3F6F97">
+          <AssociationSet Name="FK__Attribute__AttrI__29221CFB" Association="Self.FK__Attribute__AttrI__29221CFB">
+            <End Role="Attributes" EntitySet="Attributes" />
+            <End Role="AttributeValues" EntitySet="AttributeValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BookAttri__AttrI__151B244E" Association="Self.FK__BookAttri__AttrI__151B244E">
+            <End Role="Attributes" EntitySet="Attributes" />
+            <End Role="BookAttributes" EntitySet="BookAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BookAttri__BookI__160F4887" Association="Self.FK__BookAttri__BookI__160F4887">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="BookAttributes" EntitySet="BookAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books__AuthorId__17036CC0" Association="Self.FK__Books__AuthorId__17036CC0">
             <End Role="Authors" EntitySet="Authors" />
             <End Role="Books" EntitySet="Books" />
           </AssociationSet>
-          <AssociationSet Name="FK__Books__CountryId__2A4B4B5E" Association="Self.FK__Books__CountryId__2A4B4B5E">
+          <AssociationSet Name="FK__Books__CountryId__17F790F9" Association="Self.FK__Books__CountryId__17F790F9">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Books" EntitySet="Books" />
           </AssociationSet>
-          <AssociationSet Name="FK__Books__GenerId__2C3393D0" Association="Self.FK__Books__GenerId__2C3393D0">
-            <End Role="Geners" EntitySet="Geners" />
-            <End Role="Books" EntitySet="Books" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -102,6 +292,84 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Attributes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AttrType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AttributeValues" Relationship="Self.FK__Attribute__AttrI__29221CFB" FromRole="Attributes" ToRole="AttributeValues" />
+          <NavigationProperty Name="BookAttributes" Relationship="Self.FK__BookAttri__AttrI__151B244E" FromRole="Attributes" ToRole="BookAttributes" />
+        </EntityType>
+        <EntityType Name="AttributeValues">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AttrValue" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="AttrId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Attributes" Relationship="Self.FK__Attribute__AttrI__29221CFB" FromRole="AttributeValues" ToRole="Attributes" />
+        </EntityType>
         <EntityType Name="Authors">
           <Key>
             <PropertyRef Name="ID" />
@@ -110,7 +378,18 @@
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Books" Relationship="Self.FK__Books__AuthorId__2B3F6F97" FromRole="Authors" ToRole="Books" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Books__AuthorId__17036CC0" FromRole="Authors" ToRole="Books" />
+        </EntityType>
+        <EntityType Name="BookAttributes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="Int32" Nullable="false" />
+          <Property Name="AttrId" Type="Int32" Nullable="false" />
+          <Property Name="AttrValue" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Attributes" Relationship="Self.FK__BookAttri__AttrI__151B244E" FromRole="BookAttributes" ToRole="Attributes" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__BookAttri__BookI__160F4887" FromRole="BookAttributes" ToRole="Books" />
         </EntityType>
         <EntityType Name="Books">
           <Key>
@@ -119,15 +398,14 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="PageCount" Type="Int32" />
-          <Property Name="BookDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PageCount" Type="Int32" Nullable="false" />
+          <Property Name="BookDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Picture" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CountryId" Type="Int32" Nullable="false" />
           <Property Name="AuthorId" Type="Int32" Nullable="false" />
-          <Property Name="GenerId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Authors" Relationship="Self.FK__Books__AuthorId__2B3F6F97" FromRole="Books" ToRole="Authors" />
-          <NavigationProperty Name="Countries" Relationship="Self.FK__Books__CountryId__2A4B4B5E" FromRole="Books" ToRole="Countries" />
-          <NavigationProperty Name="Geners" Relationship="Self.FK__Books__GenerId__2C3393D0" FromRole="Books" ToRole="Geners" />
+          <NavigationProperty Name="Authors" Relationship="Self.FK__Books__AuthorId__17036CC0" FromRole="Books" ToRole="Authors" />
+          <NavigationProperty Name="BookAttributes" Relationship="Self.FK__BookAttri__BookI__160F4887" FromRole="Books" ToRole="BookAttributes" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK__Books__CountryId__17F790F9" FromRole="Books" ToRole="Countries" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -136,17 +414,61 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CountryCode" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Books" Relationship="Self.FK__Books__CountryId__2A4B4B5E" FromRole="Countries" ToRole="Books" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Books__CountryId__17F790F9" FromRole="Countries" ToRole="Books" />
         </EntityType>
-        <EntityType Name="Geners">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Gener" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Books" Relationship="Self.FK__Books__GenerId__2C3393D0" FromRole="Geners" ToRole="Books" />
-        </EntityType>
-        <Association Name="FK__Books__AuthorId__2B3F6F97">
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Attribute__AttrI__29221CFB">
+          <End Role="Attributes" Type="Self.Attributes" Multiplicity="1" />
+          <End Role="AttributeValues" Type="Self.AttributeValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attributes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AttributeValues">
+              <PropertyRef Name="AttrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BookAttri__AttrI__151B244E">
+          <End Role="Attributes" Type="Self.Attributes" Multiplicity="1" />
+          <End Role="BookAttributes" Type="Self.BookAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attributes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookAttributes">
+              <PropertyRef Name="AttrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books__AuthorId__17036CC0">
           <End Role="Authors" Type="Self.Authors" Multiplicity="1" />
           <End Role="Books" Type="Self.Books" Multiplicity="*" />
           <ReferentialConstraint>
@@ -158,7 +480,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Books__CountryId__2A4B4B5E">
+        <Association Name="FK__BookAttri__BookI__160F4887">
+          <End Role="Books" Type="Self.Books" Multiplicity="1" />
+          <End Role="BookAttributes" Type="Self.BookAttributes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookAttributes">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books__CountryId__17F790F9">
           <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
           <End Role="Books" Type="Self.Books" Multiplicity="*" />
           <ReferentialConstraint>
@@ -170,34 +504,53 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Books__GenerId__2C3393D0">
-          <End Role="Geners" Type="Self.Geners" Multiplicity="1" />
-          <End Role="Books" Type="Self.Books" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Geners">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Books">
-              <PropertyRef Name="GenerId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
         </Association>
         <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Attributes" EntityType="Self.Attributes" />
+          <EntitySet Name="AttributeValues" EntityType="Self.AttributeValues" />
           <EntitySet Name="Authors" EntityType="Self.Authors" />
+          <EntitySet Name="BookAttributes" EntityType="Self.BookAttributes" />
           <EntitySet Name="Books" EntityType="Self.Books" />
           <EntitySet Name="Countries" EntityType="Self.Countries" />
-          <EntitySet Name="Geners" EntityType="Self.Geners" />
-          <AssociationSet Name="FK__Books__AuthorId__2B3F6F97" Association="Self.FK__Books__AuthorId__2B3F6F97">
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Attribute__AttrI__29221CFB" Association="Self.FK__Attribute__AttrI__29221CFB">
+            <End Role="Attributes" EntitySet="Attributes" />
+            <End Role="AttributeValues" EntitySet="AttributeValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BookAttri__AttrI__151B244E" Association="Self.FK__BookAttri__AttrI__151B244E">
+            <End Role="Attributes" EntitySet="Attributes" />
+            <End Role="BookAttributes" EntitySet="BookAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books__AuthorId__17036CC0" Association="Self.FK__Books__AuthorId__17036CC0">
             <End Role="Authors" EntitySet="Authors" />
             <End Role="Books" EntitySet="Books" />
           </AssociationSet>
-          <AssociationSet Name="FK__Books__CountryId__2A4B4B5E" Association="Self.FK__Books__CountryId__2A4B4B5E">
+          <AssociationSet Name="FK__BookAttri__BookI__160F4887" Association="Self.FK__BookAttri__BookI__160F4887">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="BookAttributes" EntitySet="BookAttributes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books__CountryId__17F790F9" Association="Self.FK__Books__CountryId__17F790F9">
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Books" EntitySet="Books" />
           </AssociationSet>
-          <AssociationSet Name="FK__Books__GenerId__2C3393D0" Association="Self.FK__Books__GenerId__2C3393D0">
-            <End Role="Geners" EntitySet="Geners" />
-            <End Role="Books" EntitySet="Books" />
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -206,6 +559,79 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="Database1Model.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Database1Model.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="Database1Model.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="Database1Model.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Database1Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attributes">
+            <EntityTypeMapping TypeName="Database1Model.Attributes">
+              <MappingFragment StoreEntitySet="Attributes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AttrType" ColumnName="AttrType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AttributeValues">
+            <EntityTypeMapping TypeName="Database1Model.AttributeValues">
+              <MappingFragment StoreEntitySet="AttributeValues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AttrValue" ColumnName="AttrValue" />
+                <ScalarProperty Name="AttrId" ColumnName="AttrId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Authors">
             <EntityTypeMapping TypeName="Database1Model.Authors">
               <MappingFragment StoreEntitySet="Authors">
@@ -213,6 +639,16 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookAttributes">
+            <EntityTypeMapping TypeName="Database1Model.BookAttributes">
+              <MappingFragment StoreEntitySet="BookAttributes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="AttrId" ColumnName="AttrId" />
+                <ScalarProperty Name="AttrValue" ColumnName="AttrValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -227,7 +663,6 @@
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="CountryId" ColumnName="CountryId" />
                 <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
-                <ScalarProperty Name="GenerId" ColumnName="GenerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -240,14 +675,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Geners">
-            <EntityTypeMapping TypeName="Database1Model.Geners">
-              <MappingFragment StoreEntitySet="Geners">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Gener" ColumnName="Gener" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Database1Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

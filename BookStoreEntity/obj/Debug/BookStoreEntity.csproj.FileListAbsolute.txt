@@ -20,3 +20,13 @@ C:\Users\root\Source\Repos\Books\BookStoreEntity\bin\Debug\EntityFramework.SqlSe
 C:\Users\root\Source\Repos\Books\BookStoreEntity\obj\Debug\BookStoreEntity.csprojResolveAssemblyReference.cache
 C:\Users\root\Source\Repos\Books\BookStoreEntity\obj\Debug\BookStoreEntity.dll
 C:\Users\root\Source\Repos\Books\BookStoreEntity\obj\Debug\BookStoreEntity.pdb
+C:\Users\root\Source\Repos\BookStore-one-to-many-\BookStoreEntity\bin\Debug\BookStoreEntity.dll.config
+C:\Users\root\Source\Repos\BookStore-one-to-many-\BookStoreEntity\bin\Debug\BookStoreEntity.dll
+C:\Users\root\Source\Repos\BookStore-one-to-many-\BookStoreEntity\bin\Debug\BookStoreEntity.pdb
+C:\Users\root\Source\Repos\BookStore-one-to-many-\BookStoreEntity\bin\Debug\EntityFramework.dll
+C:\Users\root\Source\Repos\BookStore-one-to-many-\BookStoreEntity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\root\Source\Repos\BookStore-one-to-many-\BookStoreEntity\bin\Debug\EntityFramework.xml
+C:\Users\root\Source\Repos\BookStore-one-to-many-\BookStoreEntity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\root\Source\Repos\BookStore-one-to-many-\BookStoreEntity\obj\Debug\BookStoreEntity.dll
+C:\Users\root\Source\Repos\BookStore-one-to-many-\BookStoreEntity\obj\Debug\BookStoreEntity.pdb
+C:\Users\root\Source\Repos\BookStore-one-to-many-\BookStoreEntity\obj\Debug\BookStoreEntity.csprojResolveAssemblyReference.cache

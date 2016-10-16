@@ -25,9 +25,16 @@ namespace BookStoreEntity
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<Attributes> Attributes { get; set; }
+        public virtual DbSet<AttributeValues> AttributeValues { get; set; }
         public virtual DbSet<Authors> Authors { get; set; }
+        public virtual DbSet<BookAttributes> BookAttributes { get; set; }
         public virtual DbSet<Books> Books { get; set; }
         public virtual DbSet<Countries> Countries { get; set; }
-        public virtual DbSet<Geners> Geners { get; set; }
     }
 }

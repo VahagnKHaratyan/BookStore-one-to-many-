@@ -15,6 +15,7 @@ namespace BookStoreMVC.Controllers
     public class CountriesController : Controller
     {
         private Database1Entities db = new Database1Entities();
+     
 
         // GET: Countries
         public async Task<ActionResult> Index()

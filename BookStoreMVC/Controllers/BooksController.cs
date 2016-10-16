@@ -21,11 +21,11 @@ namespace BookStoreMVC.Controllers
         public async Task<ActionResult> Index(string searchString, string sortOption, int page = 1, string pageType = "table")
         {
             
-            var books = db.Books.Include(b => b.Authors).Include(b => b.Countries).Include(b => b.Geners);
+            var books = db.Books.Include(b => b.Authors).Include(b => b.Countries)/*.Include(b => b.Geners)*/;
             if (!String.IsNullOrEmpty(searchString))
             {
 
-                books = db.Books.Where(p => p.Title.ToLower().Contains(searchString) || (p.Authors.FirstName.ToLower() + " " + p.Authors.LastName.ToLower()).Contains(searchString));
+                books = db.Books.Where(p => p.Title.ToLower().Contains(searchString) || (p.Authors. FirstName.ToLower() + " " + p.Authors.LastName.ToLower()).Contains(searchString));
             }
             switch (sortOption)
             {
@@ -66,12 +66,12 @@ namespace BookStoreMVC.Controllers
                 case "Name_desc":
                     books = books.OrderByDescending(p => p.Countries.Name);
                     break;
-                case "Gener_asc":
-                    books = books.OrderBy(p => p.Geners.Gener);
-                    break;
-                case "Gener_desc":
-                    books = books.OrderByDescending(p => p.Geners.Gener);
-                    break;
+                //case "Gener_asc":
+                //    books = books.OrderBy(p => p.Geners.Gener);
+                //    break;
+                //case "Gener_desc":
+                //    books = books.OrderByDescending(p => p.Geners.Gener);
+                //    break;
                 default:
                     books = books.OrderBy(p => p.ID);
                     break;
@@ -115,13 +115,14 @@ namespace BookStoreMVC.Controllers
             }
             return View(books);
         }
+       
         [Authorize]
         // GET: Books/Create
         public ActionResult Create()
         {
             ViewBag.AuthorId = new SelectList(db.Authors, "ID", "FullName");
             ViewBag.CountryId = new SelectList(db.Countries, "ID", "Name");
-            ViewBag.GenerId = new SelectList(db.Geners, "ID", "Gener");
+            ViewBag.Attributes = new MultiSelectList(db.Attributes, "ID", "Name");
             return View();
         }
 
@@ -131,7 +132,7 @@ namespace BookStoreMVC.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Title,Price,PageCount,BookDescription,Picture,CountryId,AuthorId,GenerId")] Books books, HttpPostedFileBase upload)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Title,Price,PageCount,BookDescription,Picture,CountryId,AuthorId")] Books books, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -165,7 +166,7 @@ namespace BookStoreMVC.Controllers
 
             ViewBag.AuthorId = new SelectList(db.Authors, "ID", "FirstName", books.AuthorId);
             ViewBag.CountryId = new SelectList(db.Countries, "ID", "Name", books.CountryId);
-            ViewBag.GenerId = new SelectList(db.Geners, "ID", "Gener", books.GenerId);
+            //ViewBag.GenerId = new SelectList(db.Geners, "ID", "Gener", books.GenerId);
             return View(books);
         }
 
@@ -184,7 +185,7 @@ namespace BookStoreMVC.Controllers
             }
             ViewBag.AuthorId = new SelectList(db.Authors, "ID", "FullName", books.AuthorId);
             ViewBag.CountryId = new SelectList(db.Countries, "ID", "Name", books.CountryId);
-            ViewBag.GenerId = new SelectList(db.Geners, "ID", "Gener", books.GenerId);
+            //ViewBag.GenerId = new SelectList(db.Geners, "ID", "Gener", books.GenerId);
             return View(books);
         }
 
@@ -194,7 +195,7 @@ namespace BookStoreMVC.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Title,Price,PageCount,BookDescription,Picture,CountryId,AuthorId,GenerId")] Books books, HttpPostedFileBase upload)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Title,Price,PageCount,BookDescription,Picture,CountryId,AuthorId")] Books books, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -230,7 +231,7 @@ namespace BookStoreMVC.Controllers
             }
             ViewBag.AuthorId = new SelectList(db.Authors, "ID", "FirstName", books.AuthorId);
             ViewBag.CountryId = new SelectList(db.Countries, "ID", "Name", books.CountryId);
-            ViewBag.GenerId = new SelectList(db.Geners, "ID", "Gener", books.GenerId);
+            //ViewBag.GenerId = new SelectList(db.Geners, "ID", "Gener", books.GenerId);
             return View(books);
         }
 

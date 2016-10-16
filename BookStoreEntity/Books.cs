@@ -11,30 +11,35 @@ namespace BookStoreEntity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class Books
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Books()
+        {
+            this.BookAttributes = new HashSet<BookAttributes>();
+        }
         public int ID { get; set; }
         [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }
-       
+
         [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "Price is required")]      
+        [Required(ErrorMessage = "Price is required")]
         [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "enter decimal value of format $9.99")]
 
         public decimal Price { get; set; }
-        public Nullable<int> PageCount { get; set; }
+        public int PageCount { get; set; }
         public string BookDescription { get; set; }
         public string Picture { get; set; }
         public int CountryId { get; set; }
         public int AuthorId { get; set; }
-        public int GenerId { get; set; }
     
         public virtual Authors Authors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BookAttributes> BookAttributes { get; set; }
         public virtual Countries Countries { get; set; }
-        public virtual Geners Geners { get; set; }
-       
+        public virtual ICollection<Attributes> Attributes { get; set; }
+
     }
 }
